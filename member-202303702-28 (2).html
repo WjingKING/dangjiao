@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="党员身份卡" />
+  <title>党员身份卡 · 吴静</title>
+  <style>
+    :root {
+      --red: #c62828;
+      --red-deep: #8e1b1b;
+      --gold: #e8c547;
+      --ink: #1f1a17;
+      --muted: #6b5e57;
+      --paper: #f7f1ea;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "SimSun", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 90% 55% at 50% -10%, rgba(198,40,40,0.16), transparent 55%),
+        linear-gradient(180deg, #faf6f1 0%, #efe6dc 100%);
+    }
+    .wrap { max-width: 400px; margin: 0 auto; padding: 28px 16px 48px; }
+    .brand {
+      text-align: center; margin-bottom: 18px;
+    }
+    .brand-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ff7043, var(--red-deep));
+      color: var(--gold); font-size: 22px; font-weight: 700;
+      box-shadow: 0 8px 20px rgba(142,27,27,0.28);
+      margin-bottom: 10px;
+    }
+    .brand h1 {
+      margin: 0; font-size: 22px; letter-spacing: 0.28em; font-weight: 700;
+      text-indent: 0.28em;
+    }
+    .motto {
+      margin: 8px 0 0; font-size: 15px; letter-spacing: 0.42em; text-indent: 0.42em;
+      color: var(--red); font-weight: 700;
+    }
+    .card {
+      position: relative; overflow: hidden; border-radius: 4px;
+      background:
+        linear-gradient(160deg, #d32f2f 0%, var(--red) 42%, var(--red-deep) 100%);
+      color: #fff;
+      box-shadow: 0 18px 40px rgba(142,27,27,0.28);
+    }
+    .card::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(circle at 88% 12%, rgba(255,255,255,0.18), transparent 32%),
+        radial-gradient(circle at 12% 88%, rgba(0,0,0,0.16), transparent 40%);
+    }
+    .card-inner { position: relative; z-index: 1; padding: 22px 20px 18px; }
+    .card-head {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+      margin-bottom: 18px;
+    }
+    .photo {
+      width: 84px; height: 108px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(0,0,0,0.12));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .head-main { min-width: 0; flex: 1; padding-top: 2px; }
+    .name {
+      margin: 0 0 8px; font-size: 28px; font-weight: 800; letter-spacing: 0.12em;
+      line-height: 1.15;
+    }
+    .status {
+      display: inline-block; padding: 3px 0; font-size: 13px; letter-spacing: 0.08em;
+      border-bottom: 1px solid rgba(232,197,71,0.75); color: #ffe082; font-weight: 700;
+    }
+    .rows { display: grid; gap: 10px; }
+    .row {
+      display: grid; grid-template-columns: 5.5em 1fr; gap: 8px;
+      font-size: 14px; line-height: 1.45;
+    }
+    .row .k { opacity: 0.88; letter-spacing: 0.04em; }
+    .row .v { font-weight: 700; word-break: break-word; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .card-foot {
+      margin-top: 18px; padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.22);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 11px; line-height: 1.55; opacity: 0.9;
+    }
+    .card-foot .line { word-break: break-all; }
+    .card-foot .label { opacity: 0.8; margin-right: 6px; }
+    .note {
+      margin: 16px 4px 0; text-align: center; font-size: 12px; color: var(--muted);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif; letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="brand">
+      <div class="brand-mark" aria-hidden="true">★</div>
+      <h1>党员身份卡</h1>
+      <p class="motto">为人民服务</p>
+    </header>
+    <article class="card" aria-label="党员身份卡">
+      <div class="card-inner">
+        <div class="card-head">
+          <div class="photo">吴</div>
+          <div class="head-main">
+            <h2 class="name">吴静</h2>
+            <div class="status">预备党员</div>
+          </div>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="k">性别</span><span class="v">女</span></div>
+          <div class="row"><span class="k">入党时间</span><span class="v">2026-10-11</span></div>
+          <div class="row"><span class="k">所在支部</span><span class="v">区块链学院学生党支部</span></div>
+          <div class="row"><span class="k">志愿书编号</span><span class="v">23202303702</span></div>
+        </div>
+        <footer class="card-foot">
+          <div class="line"><span class="label">存证号</span>66d661bbe2…38a8a1ac</div>
+          <div class="line"><span class="label">SM3</span>1b388f0069…aca7c883</div>
+        </footer>
+      </div>
+    </article>
+    <p class="note">中国共产党党员电子身份卡</p>
+  </div>
+</body>
+</html>
