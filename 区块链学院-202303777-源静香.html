@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="党员身份卡 · 联盟链核验" />
+  <title>党员身份卡 · 源静香</title>
+  <style>
+    :root {
+      --red: #b71c1c;
+      --red-mid: #c62828;
+      --red-soft: #e53935;
+      --gold: #f0d078;
+      --ink: #2a1f1c;
+      --muted: #7a6a62;
+      --line: rgba(255,255,255,0.22);
+      --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      --serif: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 80% 42% at 50% -4%, rgba(198,40,40,0.16), transparent 58%),
+        linear-gradient(180deg, #fcfaf7 0%, #f3ebe3 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 400px; margin: 0 auto; padding: 22px 14px 48px; }
+    .brand { text-align: center; margin-bottom: 14px; }
+    .brand-mark {
+      width: 44px; height: 44px; margin: 0 auto 8px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: linear-gradient(145deg, var(--red-soft), var(--red));
+      color: var(--gold); font-size: 22px; font-weight: 700;
+      box-shadow: 0 8px 18px rgba(183,28,28,0.28);
+    }
+    .brand h1 {
+      margin: 0; font-family: var(--serif);
+      font-size: 23px; letter-spacing: 0.34em; text-indent: 0.34em; font-weight: 700;
+      color: #3b1d1a;
+    }
+    .motto {
+      margin: 8px 0 0; font-family: var(--serif);
+      font-size: 15px; letter-spacing: 0.52em; text-indent: 0.52em;
+      color: var(--red-mid); font-weight: 700;
+    }
+    .card {
+      position: relative; overflow: hidden; border-radius: 18px; color: #fff;
+      background: linear-gradient(158deg, #ef5350 0%, #c62828 42%, #8e0000 100%);
+      box-shadow: 0 18px 40px rgba(142,0,0,0.24), 0 0 0 1px rgba(255,255,255,0.08) inset;
+    }
+    .card::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.9;
+      background-image:
+        radial-gradient(circle at 92% 6%, rgba(255,255,255,0.22), transparent 26%),
+        radial-gradient(circle at 6% 94%, rgba(0,0,0,0.2), transparent 34%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Ctext x='8' y='40' font-size='22' fill='rgba(255,255,255,0.08)'%3E★%3C/text%3E%3C/svg%3E");
+      background-size: auto, auto, 72px 72px;
+    }
+    .card::after {
+      content: "★"; position: absolute; right: -10px; bottom: -22px;
+      font-size: 168px; opacity: 0.1; line-height: 1; pointer-events: none;
+      color: #fff; text-shadow: 0 0 24px rgba(240,208,120,0.25);
+    }
+    .card-inner { position: relative; z-index: 1; padding: 20px 18px 18px; }
+    .ribbon {
+      display: inline-block; margin-bottom: 14px; padding: 4px 12px;
+      border: 1px solid rgba(240,208,120,0.6); border-radius: 999px;
+      font-size: 11px; letter-spacing: 0.14em; color: var(--gold); font-weight: 650;
+      background: rgba(0,0,0,0.12);
+    }
+    .card-head { display: flex; gap: 14px; align-items: stretch; margin-bottom: 14px; }
+    .photo {
+      width: 88px; height: 112px; flex-shrink: 0; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.38);
+      background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(0,0,0,0.16));
+      display: grid; place-items: center;
+      font-family: var(--serif); font-size: 38px; font-weight: 700;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.14);
+    }
+    .head-main { min-width: 0; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+    .name {
+      margin: 0; font-family: var(--serif);
+      font-size: 28px; font-weight: 800; letter-spacing: 0.16em; line-height: 1.15;
+    }
+    .status {
+      align-self: flex-start; padding: 3px 10px; border-radius: 999px;
+      font-size: 12px; letter-spacing: 0.08em; font-weight: 700; color: #3b2108;
+      background: linear-gradient(90deg, #ffe29a, #f0d078);
+    }
+    .section {
+      margin-top: 12px; padding: 12px 12px 10px;
+      border-radius: 12px; background: rgba(0,0,0,0.14);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .section-title {
+      margin: 0 0 10px; font-size: 11px; letter-spacing: 0.16em;
+      opacity: 0.9; font-weight: 700; color: var(--gold);
+    }
+    .rows { display: grid; gap: 8px; }
+    .row {
+      display: grid; grid-template-columns: 5.2em 1fr; gap: 8px;
+      font-size: 13.5px; line-height: 1.45; align-items: start;
+    }
+    .row .k { opacity: 0.84; }
+    .row .v { font-weight: 650; word-break: break-word; }
+    .proof-item {
+      display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: start;
+      padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,0.16);
+    }
+    .proof-item:last-of-type { border-bottom: none; padding-bottom: 2px; }
+    .proof-item .lab { font-size: 11px; opacity: 0.86; margin-bottom: 3px; letter-spacing: 0.04em; }
+    .proof-item .val {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px; line-height: 1.45; word-break: break-all; opacity: 0.98;
+    }
+    .copy-btn, .copy-all {
+      appearance: none; border: 1px solid rgba(255,255,255,0.38);
+      background: rgba(255,255,255,0.14); color: #fff;
+      border-radius: 8px; padding: 5px 9px; font-size: 11px; cursor: pointer;
+      white-space: nowrap; font-family: var(--sans); font-weight: 600;
+    }
+    .copy-all {
+      width: 100%; margin-top: 10px; padding: 9px 12px; font-size: 12.5px;
+      background: rgba(240,208,120,0.18); border-color: rgba(240,208,120,0.55); color: #ffe9a8;
+    }
+    .copy-btn:disabled, .copy-all:disabled { opacity: 0.45; cursor: not-allowed; }
+    .copy-btn:active, .copy-all:active { transform: scale(0.98); }
+    .copy-btn.ok, .copy-all.ok { background: rgba(103,194,58,0.3); border-color: rgba(103,194,58,0.55); color: #fff; }
+    .toast {
+      position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%);
+      background: rgba(33,33,33,0.9); color: #fff; padding: 9px 16px; border-radius: 10px;
+      font-size: 13px; opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 20;
+    }
+    .toast.show { opacity: 1; }
+    .note {
+      margin: 14px 4px 0; text-align: center; font-size: 12px; color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="brand">
+      <div class="brand-mark" aria-hidden="true">★</div>
+      <h1>党员身份卡</h1>
+      <p class="motto">为人民服务</p>
+    </header>
+    <article class="card" aria-label="党员身份卡">
+      <div class="card-inner">
+        <div class="ribbon">中国共产党 · 电子身份卡</div>
+        <div class="card-head">
+          <div class="photo">源</div>
+          <div class="head-main">
+            <h2 class="name">源静香</h2>
+            <div class="status">中共党员</div>
+          </div>
+        </div>
+        <section class="section">
+          <div class="section-title">基本信息</div>
+          <div class="rows">
+            <div class="row"><span class="k">性别</span><span class="v">女</span></div>
+            <div class="row"><span class="k">入党时间</span><span class="v">2026-03-30</span></div>
+            <div class="row"><span class="k">所在支部</span><span class="v">区块链学院团总支</span></div>
+            <div class="row"><span class="k">志愿书编号</span><span class="v">20260330</span></div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="section-title">联盟链核验</div>
+          <div class="proof-item">
+            <div>
+              <div class="lab">联盟链交易号</div>
+              <div class="val">526d5ee559a5395c6c925af138f5de7cb067abd5037b9ebadbc20d15bc3585be</div>
+            </div>
+            <button type="button" class="copy-btn" data-copy="526d5ee559a5395c6c925af138f5de7cb067abd5037b9ebadbc20d15bc3585be" >复制</button>
+          </div>
+          <div class="proof-item">
+            <div>
+              <div class="lab">凭证摘要 SM3</div>
+              <div class="val">30ad764d76705074c357f75cb6ae27db3fbb9611839408fd300f818a46366e05</div>
+            </div>
+            <button type="button" class="copy-btn" data-copy="30ad764d76705074c357f75cb6ae27db3fbb9611839408fd300f818a46366e05" >复制</button>
+          </div>
+          
+          <button type="button" class="copy-all" data-copy="联盟链交易号：526d5ee559a5395c6c925af138f5de7cb067abd5037b9ebadbc20d15bc3585be
+凭证摘要 SM3：30ad764d76705074c357f75cb6ae27db3fbb9611839408fd300f818a46366e05" >一键复制完整核验信息</button>
+        </section>
+      </div>
+    </article>
+    <p class="note">扫码核验 · 资格证明只出示结论，不暴露材料明细</p>
+  </div>
+  <div class="toast" id="toast">已复制</div>
+  <script>
+    (function () {
+      var toast = document.getElementById('toast')
+      var timer = null
+      function showToast(msg) {
+        toast.textContent = msg || '已复制'
+        toast.classList.add('show')
+        clearTimeout(timer)
+        timer = setTimeout(function () { toast.classList.remove('show') }, 1600)
+      }
+      function copyText(text, btn, okLabel) {
+        if (!text) { showToast('暂无可复制内容'); return }
+        var label = okLabel || '复制'
+        function done() {
+          if (btn) {
+            btn.classList.add('ok')
+            var prev = btn.textContent
+            btn.textContent = '已复制'
+            setTimeout(function () { btn.classList.remove('ok'); btn.textContent = prev || label }, 1200)
+          }
+          showToast('已复制完整内容')
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(function () { fallback(text, done) })
+        } else {
+          fallback(text, done)
+        }
+      }
+      function fallback(text, done) {
+        var ta = document.createElement('textarea')
+        ta.value = text
+        ta.setAttribute('readonly', '')
+        ta.style.position = 'fixed'
+        ta.style.left = '-9999px'
+        document.body.appendChild(ta)
+        ta.select()
+        try { document.execCommand('copy'); done() } catch (e) { showToast('复制失败，请长按选中') }
+        document.body.removeChild(ta)
+      }
+      document.querySelectorAll('.copy-btn, .copy-all').forEach(function (btn) {
+        btn.addEventListener('click', function () { copyText(btn.getAttribute('data-copy') || '', btn) })
+      })
+    })()
+  </script>
+</body>
+</html>
